@@ -1,0 +1,54 @@
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">{{ title }}</h1>
+        <p class="text-xs-center">
+          <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+          <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+        </p>
+        <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <div *ngIf="authType === 'register'" class="form-group">
+              <input
+                formControlName="userName"
+                placeholder="Username"
+                class="form-control form-control-lg"
+                type="text"
+                />
+                <span class="help-block" *ngIf="!authForm.get('userName').valid && authForm.get('userName').touched">
+                  <span *ngIf="authForm.get('userName').errors['required']" class="help-block">*This Field Is Required!</span>
+                </span>
+            </div>
+            <div class="form-group">
+              <input
+                formControlName="email"
+                placeholder="Email"
+                class="form-control form-control-lg"
+                type="text" />
+                <span class="help-block" *ngIf="!authForm.get('email').valid && authForm.get('email').touched">
+                  <span *ngIf="authForm.get('email').errors['required']" class="help-block">*This Field Is Required!</span>
+                </span>
+            </div>
+            <div class="form-group">
+              <input
+                formControlName="password"
+                placeholder="Password"
+                class="form-control form-control-lg"
+                type="password" />
+                <span class="help-block" *ngIf="!authForm.get('password').valid && authForm.get('password').touched">
+                  <span *ngIf="authForm.get('password').errors['required']" class="help-block">*This Field Is Required!</span>
+                </span>
+            </div>
+            <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
+              {{ title }}
+            </button>
+          </fieldset>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
